@@ -1,15 +1,19 @@
 name: 'gitdoc-sync-docker'
 description: 'Build Git doc to other platform'
 inputs:
-  access_key:
-    description: 'oss access key id'
+  yuqueNamespace:
     required: true
-  access_secret:
-    description: 'oss access  secret id'
+  yuqueSite:
+    required: true
+  yuqueToken:
     required: true
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.yuqueNamespace }}
+    - ${{ inputs.yuqueSite }}
+    - ${{ inputs.yuqueToken }}
 
       
