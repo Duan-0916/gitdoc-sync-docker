@@ -1,0 +1,15 @@
+name: 'gitdoc-sync-docker'
+description: 'Build Git doc to other platform'
+inputs:
+  access_key:
+    description: 'oss access key id'
+    required: true
+  access_secret:
+    description: 'oss access  secret id'
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+      
