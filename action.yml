@@ -1,21 +1,53 @@
 name: 'gitdoc-sync-docker'
-description: 'Build Git doc to other platform'
+description: 'Build Git repo docs to yuque '
 inputs:
+  osc_user:
+    required: true
+  osc_pwd:
+    required: true
   yuqueNamespace:
     required: true
   yuqueSite:
     required: true
   yuqueToken:
+    required: true    
+  gitRepo:
     required: true
+  gitBranch:
+    required: true
+  gitDocToc:
+    required: true    
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.yuqueNamespace }}
-    - ${{ inputs.yuqueSite }}
-    - ${{ inputs.yuqueToken }}
+  using: 'composite'
+  steps:
+    - name: Checkout Git Repo
+      uses: actions/checkout@v2
+    - name: Login to Aliyun Container Registry
+      run: docker login --username ${{ inputs.osc_user }} --password ${{ inputs.osc_pwd }} oscollege-registry.cn-hangzhou.cr.aliyuncs.com
+      shell: bash
 
+    - name: Start Docker container
+      run: |
+        docker run -itd -p 8080:8777 --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest
+      shell: bash
 
-https://github.com/15669072513/gitdoc-sync-docker
-      
+    - name: Wait for container to start
+      run: sleep 10 
+      shell: bash
+    - name: Check port availability and sync Git Repo to Yuque
+      run: |
+        curl --location 'http://localhost:8080/v1/rest/sync' \
+        --header 'Content-Type: application/json' \
+        --data '{
+            "inputs": {
+                "yuqueNamespace": "${{ inputs.yuqueNamespace }}",
+                "yuqueSite": "${{ inputs.yuqueSite }}",
+                "yuqueToken":"${{ inputs.yuqueToken }}",
+                "gitRepo": "${{ inputs.gitRepo }}",
+                "gitDocRoot": "/",
+                "gitDocToc": "${{ inputs.gitDocToc }}",
+                "gitBranch": "${{ inputs.gitBranch }}"
+            }
+          }'
+        shell: bash
