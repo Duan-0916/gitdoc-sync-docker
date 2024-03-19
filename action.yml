@@ -50,4 +50,4 @@ runs:
                 "gitBranch": "${{ inputs.gitBranch }}"
             }
           }'
-        shell: bash
+      shell: bash
