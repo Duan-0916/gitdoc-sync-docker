@@ -41,14 +41,14 @@ runs:
         --header 'Content-Type: application/json' \
         --data '{
             "inputs": {
-                "yuqueNamespace":"${{ inputs.yuqueNamespace }}",
-                "yuqueSite":"${{ inputs.yuqueSite }}",
-                "yuqueToken":"${{ inputs.yuqueToken }}",
-                "gitRepo":"${{ inputs.gitRepo }}",
-                "gitDocRoot":"/",
-                "gitDocToc":"${{ inputs.gitDocToc }}",
-                "gitBranch":"${{ inputs.gitBranch }}",
-                "isGitHub":"true"
+                "yuqueNamespace": "${{ inputs.yuqueNamespace }}",
+                "yuqueSite": "${{ inputs.yuqueSite }}",
+                "yuqueToken": "${{ inputs.yuqueToken }}",
+                "gitRepo": "${{ inputs.gitRepo }}",
+                "gitDocRoot": "/",
+                "gitDocToc": "${{ inputs.gitDocToc }}",
+                "gitBranch": "${{ inputs.gitBranch }}",
+                "isGitHub": "true"
             }
           }'
       shell: bash
