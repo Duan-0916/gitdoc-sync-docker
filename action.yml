@@ -42,14 +42,13 @@ runs:
         --data '{
             "inputs": {
                 "yuqueNamespace": "${{ inputs.yuqueNamespace }}",
-                "yuqueSite": "${{ inputs.yuqueSite }}",
+                "yuqueSite":"${{ inputs.yuqueSite }}",
                 "yuqueToken":"${{ inputs.yuqueToken }}",
                 "gitRepo": "${{ inputs.gitRepo }}",
                 "gitDocRoot": "/",
                 "gitDocToc": "${{ inputs.gitDocToc }}",
                 "gitBranch": "${{ inputs.gitBranch }}",
-                "isGitHub" : "true"
-
+                "isGitHub":"true"
             }
           }'
       shell: bash
