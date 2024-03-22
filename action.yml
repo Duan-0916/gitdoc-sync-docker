@@ -51,7 +51,8 @@ runs:
                 "isGitHub":"true"
             }
           }'
-      shell: bash 
+      shell: bash  
+      
     - name: test
       run: docker exec -itd git-to-yuque bash cat /var/log/sofadoc.log
       shell: bash
