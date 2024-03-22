@@ -41,17 +41,17 @@ runs:
         --header 'Content-Type: application/json' \
         --data '{
             "inputs": {
-                "yuqueNamespace": "${{ inputs.yuqueNamespace }}",
-                "yuqueSite": "${{ inputs.yuqueSite }}",
-                "yuqueToken": ${{ inputs.yuqueToken }},
-                "gitRepo": "${{ inputs.gitRepo }}",
+                "yuqueNamespace":"${{ inputs.yuqueNamespace }}",
+                "yuqueSite":"${{ inputs.yuqueSite }}",
+                "yuqueToken":"${{ inputs.yuqueToken }}",
+                "gitRepo":"${{ inputs.gitRepo }}",
                 "gitDocRoot":"/",
-                "gitDocToc": "${{ inputs.gitDocToc }}",
-                "gitBranch": "${{ inputs.gitBranch }}",
+                "gitDocToc":"${{ inputs.gitDocToc }}",
+                "gitBranch":"${{ inputs.gitBranch }}",
                 "isGitHub":"true"
             }
           }'
-      shell: bash
+      shell: bash 
     - name: test
       run: docker exec -itd git-to-yuque bash
       shell: bash
