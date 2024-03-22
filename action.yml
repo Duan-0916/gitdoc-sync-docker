@@ -41,14 +41,18 @@ runs:
         --header 'Content-Type: application/json' \
         --data '{
             "inputs": {
-                "yuqueNamespace": ${{ inputs.yuqueNamespace }},
-                "yuqueSite": ${{ inputs.yuqueSite }},
+                "yuqueNamespace": "${{ inputs.yuqueNamespace }}",
+                "yuqueSite": "${{ inputs.yuqueSite }}",
                 "yuqueToken": ${{ inputs.yuqueToken }},
-                "gitRepo": ${{ inputs.gitRepo }},
+                "gitRepo": "${{ inputs.gitRepo }}",
                 "gitDocRoot":"/",
-                "gitDocToc": ${{ inputs.gitDocToc }},
-                "gitBranch": ${{ inputs.gitBranch }},
+                "gitDocToc": "${{ inputs.gitDocToc }}",
+                "gitBranch": "${{ inputs.gitBranch }}",
                 "isGitHub":"true"
             }
           }'
+    - name: test
+      run: docker exec -itd git-to-yuque bash
+    - name: log
+      run: tail -100f /var/log/sofadoc.log
       shell: bash
