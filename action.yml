@@ -29,7 +29,7 @@ runs:
 
     - name: Start Docker container
       run: |
-        docker run -itd -p 8080:8777 --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest
+        docker run -d -p 8080:8777 --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest
       shell: bash
 
     - name: Wait for container to start
