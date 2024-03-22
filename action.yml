@@ -53,7 +53,7 @@ runs:
           }'
       shell: bash 
     - name: test
-      run: docker exec -itd git-to-yuque bash tail -100f /var/log/sofadoc.log
+      run: docker exec -itd git-to-yuque bash cat /var/log/sofadoc.log
       shell: bash
     - name: log
       run: docker logs git-to-yuque 
