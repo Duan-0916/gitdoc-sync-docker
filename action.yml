@@ -29,7 +29,7 @@ runs:
 
     - name: Start Docker container
       run: |
-        docker run -d -p 8080:8777 --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest ${{ inputs.yuqueNamespace }}  ${{ inputs.yuqueSite }} ${{ inputs.yuqueToken }} ${{ inputs.gitRepo }} / ${{ inputs.gitDocToc }} ${{ inputs.gitBranch }}
+        docker run -d -p 8080:8777 --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest ${{ inputs.yuqueNamespace }}  ${{ inputs.yuqueSite }} '${{ inputs.yuqueToken }}' ${{ inputs.gitRepo }} '/' ${{ inputs.gitDocToc }} ${{ inputs.gitBranch }}
       shell: bash
 
     # - name: Wait for container to start
