@@ -29,29 +29,29 @@ runs:
 
     - name: Start Docker container
       run: |
-        docker run -d -p 8080:8777 --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest
+        docker run -d -p 8080:8777 --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest ${{ inputs.yuqueNamespace }}  ${{ inputs.yuqueSite }} ${{ inputs.yuqueToken }} ${{ inputs.gitRepo }} / ${{ inputs.gitDocToc }} ${{ inputs.gitBranch }}
       shell: bash
 
-    - name: Wait for container to start
-      run: sleep 10 
-      shell: bash
-    - name: Check port availability and sync Git Repo to Yuque
-      run: |
-        curl --location 'http://localhost:8080/v1/rest/sync' \
-        --header 'Content-Type: application/json' \
-        --data '{
-            "inputs": {
-                "yuqueNamespace":"${{ inputs.yuqueNamespace }}",
-                "yuqueSite":"${{ inputs.yuqueSite }}",
-                "yuqueToken":"${{ inputs.yuqueToken }}",
-                "gitRepo":"${{ inputs.gitRepo }}",
-                "gitDocRoot":"/",
-                "gitDocToc":"${{ inputs.gitDocToc }}",
-                "gitBranch":"${{ inputs.gitBranch }}",
-                "isGitHub":"true"
-            }
-          }'
-      shell: bash  
+    # - name: Wait for container to start
+    #   run: sleep 10 
+    #   shell: bash
+    # - name: Check port availability and sync Git Repo to Yuque
+    #   run: |
+    #     curl --location 'http://localhost:8080/v1/rest/sync' \
+    #     --header 'Content-Type: application/json' \
+    #     --data '{
+    #         "inputs": {
+    #             "yuqueNamespace":"${{ inputs.yuqueNamespace }}",
+    #             "yuqueSite":"${{ inputs.yuqueSite }}",
+    #             "yuqueToken":"${{ inputs.yuqueToken }}",
+    #             "gitRepo":"${{ inputs.gitRepo }}",
+    #             "gitDocRoot":"/",
+    #             "gitDocToc":"${{ inputs.gitDocToc }}",
+    #             "gitBranch":"${{ inputs.gitBranch }}",
+    #             "isGitHub":"true"
+    #         }
+    #       }'
+    #   shell: bash  
       
     - name: test
       run: docker exec -itd git-to-yuque bash cat /var/log/sofadoc.log
