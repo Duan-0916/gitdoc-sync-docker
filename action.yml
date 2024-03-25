@@ -47,8 +47,7 @@ runs:
                 "gitRepo":"${{ inputs.gitRepo }}",
                 "gitDocRoot":"/",
                 "gitDocToc":"${{ inputs.gitDocToc }}",
-                "gitBranch":"${{ inputs.gitBranch }}",
-                "isGitHub":"true"
+                "gitBranch":"${{ inputs.gitBranch }}"
             }
           }'
       shell: bash  
