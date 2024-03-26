@@ -17,10 +17,6 @@ inputs:
     required: true
   gitDocToc:
     required: true    
-  gitToken:
-    require: true
-  gitUser:
-    require: true
 runs:
   using: 'composite'
   steps:
