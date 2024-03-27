@@ -17,10 +17,7 @@ inputs:
     required: true
   gitDocToc:
     required: true    
-  gitToken:
-    require: true
-  gitUser:
-    require: true
+
 runs:
   using: 'composite'
   steps:
@@ -32,9 +29,29 @@ runs:
 
     - name: Start Docker container
       run: |
-        docker run -d -p 8080:8777 -e ns='${{ inputs.yuqueNamespace }}' -e user='${{inputs.gitUser}}' -e site='${{ inputs.yuqueSite }}' -e token='${{ inputs.yuqueToken }}' -e repo='${{inputs.gitRepo}}' -e toc='${{inputs.gitDocToc}}' -e gittoken='${{inputs.gitToken}}'  --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest
+        docker run -d -p 8080:8777 --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest
       shell: bash
 
     - name: Wait for container to start
-      run: docker logs git-to-yuque
+      run: sleep 10 
+      shell: bash
+    - name: Check port availability and sync Git Repo to Yuque
+      run: |
+        curl --location 'http://localhost:8080/v1/rest/sync' \
+        --header 'Content-Type: application/json' \
+        --data '{
+            "inputs": {
+                "yuqueNamespace":"${{ inputs.yuqueNamespace }}",
+                "yuqueSite":"${{ inputs.yuqueSite }}",
+                "yuqueToken":"${{ inputs.yuqueToken }}",
+                "gitRepo":"${{ inputs.gitRepo }}",
+                "gitDocRoot":"/",
+                "gitDocToc":"${{ inputs.gitDocToc }}",
+                "gitBranch":"${{ inputs.gitBranch }}"
+            }
+          }'
+      shell: bash  
+      
+    - name: log
+      run: docker logs git-to-yuque 
       shell: bash
