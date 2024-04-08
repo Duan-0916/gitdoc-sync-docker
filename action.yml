@@ -46,7 +46,7 @@ runs:
                 "yuqueNamespace":"${{ inputs.yuqueNamespace }}",
                 "yuqueSite":"${{ inputs.yuqueSite }}",
                 "yuqueToken":"${{ inputs.yuqueToken }}",
-                "gitRepo":"${{ inputs.gitRepo }}",
+                "gitRepo":"https://github.com/${{ github.repository }}.git",
                 "gitDocRoot":"/",
                 "gitDocToc":"${{ inputs.gitDocToc }}",
                 "gitBranch":"${{ inputs.gitBranch }}"
