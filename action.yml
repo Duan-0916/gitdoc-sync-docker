@@ -14,9 +14,11 @@ inputs:
   gitRepo:
     required: true
   gitBranch:
-    required: true
+    required: false
+    default: 'main'
   gitDocToc:
-    required: true    
+    required: false  
+    default: '/docs/SUMMARY.md'
 
 runs:
   using: 'composite'
