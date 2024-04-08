@@ -1,10 +1,10 @@
 name: 'gitdoc-sync-docker'
 description: 'Build Git repo docs to yuque '
 inputs:
-  osc_user:
-    required: true
-  osc_pwd:
-    required: true
+  # osc_user:
+  #   required: true
+  # osc_pwd:
+  #   required: true
   yuqueNamespace:
     required: true
   yuqueSite:
@@ -25,13 +25,13 @@ runs:
   steps:
     - name: Checkout Git Repo
       uses: actions/checkout@v2
-    - name: Login to Aliyun Container Registry
-      run: docker login --username ${{ inputs.osc_user }} --password ${{ inputs.osc_pwd }} oscollege-registry.cn-hangzhou.cr.aliyuncs.com
-      shell: bash
+    # - name: Login to Aliyun Container Registry
+    #   run: docker login --username ${{ inputs.osc_user }} --password ${{ inputs.osc_pwd }} oscollege-registry.cn-hangzhou.cr.aliyuncs.com
+    #   shell: bash
 
     - name: Start Docker container
       run: |
-        docker run -d -p 8080:8777 --name git-to-yuque -t oscollege-registry.cn-hangzhou.cr.aliyuncs.com/oscollege/git-to-yuque:latest
+        docker run -d -p 8080:8777 --name git-to-yuque -t dwl0916/git-to-yuque:latest
       shell: bash
 
     - name: Wait for container to start
