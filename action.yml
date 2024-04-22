@@ -18,7 +18,7 @@ inputs:
     default: 'main'
   gitDocToc:
     required: false  
-    default: '/docs/SUMMARY.md'
+    default: 'docs/SUMMARY.md'
 
 runs:
   using: 'composite'
