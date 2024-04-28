@@ -31,7 +31,7 @@ runs:
 
     - name: Start Docker container
       run: |
-        docker run -d -p 8080:8777 --name git-to-yuque -t dwl0916/git-to-yuque:latest
+        docker run -d -p 8080:8777 --name git-to-yuque -t dwl0916/laytto-to-yuquec:latest
       shell: bash
 
     - name: Wait for container to start
